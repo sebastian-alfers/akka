@@ -58,10 +58,10 @@ class EventSourcedSequenceNumberBasicSpec
 
   "The sequence number" must {
 
-    def runTheSpec(testProbe: Boolean) = {
+    def runTheSpec(testProbe: Boolean, id: Int) = {
       val probe = TestProbe[String]()
 
-      val ref = spawn(behavior(PersistenceId.ofUniqueId("ess-1"), probe.ref, testProbe))
+      val ref = spawn(behavior(PersistenceId.ofUniqueId(s"ess-$id"), probe.ref, testProbe))
 
       if (testProbe) {
         probe.expectMessage("0 onRecoveryComplete")
@@ -77,11 +77,11 @@ class EventSourcedSequenceNumberBasicSpec
     }
 
     "work" in {
-      runTheSpec(testProbe = true)
+      runTheSpec(testProbe = true, 1)
     }
 
     "also work" in {
-      runTheSpec(testProbe = false)
+      runTheSpec(testProbe = false, 2)
     }
   }
 }
