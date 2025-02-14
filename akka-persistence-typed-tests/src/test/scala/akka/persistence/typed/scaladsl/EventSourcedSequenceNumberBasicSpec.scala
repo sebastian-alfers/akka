@@ -78,7 +78,7 @@ class EventSourcedSequenceNumberBasicSpec
     }
 
     "be accessible accessible when NOT testing RecoveryCompleted" in {
-      runTheSpec(false, "1")
+      runTheSpec(false, "2")
     }
   }
 }
